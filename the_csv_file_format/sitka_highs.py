@@ -6,6 +6,7 @@ with open(filename) as f:
     reader = csv.reader(f)
     header_row = next(reader)
 
-    # Show Header Row and index that belong to
-    for index, column_header in enumerate(header_row):
-        print(index, column_header)
+    # Get high temperatures from this file.
+    highs = [int(row[5]) for row in reader]
+
+print(highs)

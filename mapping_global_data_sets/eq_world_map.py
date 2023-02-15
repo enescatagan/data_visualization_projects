@@ -12,22 +12,25 @@ with open(filename) as f:
 # Get All Earthquake data
 all_eq_dicts = all_eq_data['features']
 
-mags, lons, lats = [], [], []
+mags, lons, lats, hover_texts = [], [], [], []
 # Get All Earthquake magnitudes, and
-# Location Data: longitude and latitude
+# Location Data: longitude and latitude, and title
 for eq_dict in all_eq_dicts:
     mag = eq_dict['properties']['mag']
     lon = eq_dict['geometry']['coordinates'][0]
     lat = eq_dict['geometry']['coordinates'][1]
+    title = eq_dict['properties']['title']
     mags.append(mag)
     lons.append(lon)
     lats.append(lat)
+    hover_texts.append(title)
 
 # Map the earthquakes.
 data = [{
     'type': 'scattergeo',
     'lon': lons,
     'lat': lats,
+    'text': hover_texts,
     'marker': {
         'size': [5*mag for mag in mags],
         'color': mags,

@@ -16,14 +16,10 @@ mags, lons, lats, hover_texts = [], [], [], []
 # Get All Earthquake magnitudes, and
 # Location Data: longitude and latitude, and title
 for eq_dict in all_eq_dicts:
-    mag = eq_dict['properties']['mag']
-    lon = eq_dict['geometry']['coordinates'][0]
-    lat = eq_dict['geometry']['coordinates'][1]
-    title = eq_dict['properties']['title']
-    mags.append(mag)
-    lons.append(lon)
-    lats.append(lat)
-    hover_texts.append(title)
+    mags.append(eq_dict['properties']['mag'])
+    lons.append(eq_dict['geometry']['coordinates'][0])
+    lats.append(eq_dict['geometry']['coordinates'][1])
+    hover_texts.append(eq_dict['properties']['title'])
 
 # Map the earthquakes.
 data = [{
@@ -39,7 +35,7 @@ data = [{
         'colorbar': {'title': 'Magnitude'}
     }
 }]
-my_layout = Layout(title='Global Earthquakes')
+my_layout = Layout(title=all_eq_data['metadata']['title'])
 
 fig = {'data': data, 'layout': my_layout}
 offline.plot(fig, filename='mapping_global_data_sets/global_earthquakes.html')
